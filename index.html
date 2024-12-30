@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <title>Weather</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="weather">
+        <div class="search">
+            <input type="text" placeholder="Enter city" class="in" spellcheck="false"> 
+            <button ><img src="search-icon.png" alt="" class="im"></button>
+        </div>
+        <div class="weth">
+                <img src="ramm.png" alt="">
+            <h1 class="tem"> 28°C</h1>
+            <h1 class="add">Varanasi</h1>
+
+            
+        </div>
+       <div class="box">
+        <div class="col-1 kd">
+            <img src="humi.png" alt="">
+            <div class="data">
+                <p class="hum">60%</p>
+                <p>Humidity</p> 
+            </div>
+            
+        </div>
+        <div class="col-2 kd">
+            <img src="wind.png" alt="">
+            <div class="data">
+                <p class="wind"> 60km/h</p>
+                <p>wind</p>
+            </div>
+            
+        </div>
+       </div>
+
+    </div>
+    <script>
+        const apikey='865cf986f469a7373d84794a509383e7';
+        const apiurl='https://api.openweathermap.org/data/2.5/weather?units=metric&q=';
+const  searchbox= document.querySelector(".in");
+const  searchbtn= document.querySelector(".im")
+
+
+
+;
+
+async function checkweather( kj) {
+        const response = await fetch(apiurl + kj  + `&appid=${apikey}`);
+        var data = await response.json();
+        console.log(data);
+
+
+document.querySelector(".add").innerHTML=data.name  ;
+document.querySelector(".tem").innerHTML=data.main.temp + '°C';
+document.querySelector(".hum").innerHTML=data.main.humidity +'%';
+document.querySelector(".wind").innerHTML=data.wind.speed + 'km/h';
+      }
+      searchbtn.addEventListener("click" , function ram(){
+        checkweather( searchbox.value);
+      }) 
+    </script>
+</body>
+</html>
